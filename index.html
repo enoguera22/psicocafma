@@ -3170,8 +3170,15 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
       async function iniciar() {
         let config;
         try {
-          const res = await fetch('/api/public/firebase-config');
-          config = await res.json();
+            config = {
+            apiKey: "TU_API_KEY_AQUI",
+            authDomain: "tu-proyecto.firebaseapp.com",
+            projectId: "tu-proyecto",
+            storageBucket: "tu-proyecto.appspot.com",
+            messagingSenderId: "TU_SENDER_ID",
+            appId: "TU_APP_ID"
+          };
+          
           if (!config || !config.apiKey) throw new Error('Configuracion incompleta');
         } catch (e) {
           console.warn('Sin configuracion de nube, se usa almacenamiento local', e);
@@ -3183,7 +3190,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         db = getFirestore(app);
         window.PsicoCloud.listo = true;
 
-        // Carga inicial: si la nube esta vacia, se suben los datos locales.
         try {
           const [snapA, snapU] = await Promise.all([
             getDocs(collection(db, 'aspirantes')),
@@ -3202,7 +3208,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
           setBadge('sin conexion', false);
         }
 
-        // Sincronizacion en tiempo real entre equipos
         onSnapshot(collection(db, 'aspirantes'), (snap) => {
           window.__psicoAplicarNube(snap.docs.map(d => d.data()), null);
         });
@@ -3210,8 +3215,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
           window.__psicoAplicarNube(null, snap.docs.map(d => d.data()));
         });
       }
-
-      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', iniciar);
       } else {
         iniciar();
