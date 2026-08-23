@@ -1491,7 +1491,23 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 localStorage.setItem(LS_ASP, JSON.stringify(aspirantes));
                 localStorage.setItem(LS_USR, JSON.stringify(usuarios));
             } catch(e) { console.warn('No se pudo guardar localmente', e); }
+            // Respaldo en la nube (Firebase)
+            try { window.PsicoCloud && window.PsicoCloud.guardar(aspirantes, usuarios); } catch(e) { console.warn('Nube no disponible', e); }
         }
+
+        // Puente con el modulo de nube (Firebase)
+        window.__psicoLeerDatos = () => ({ aspirantes, usuarios });
+        window.__psicoAplicarNube = (aspNube, usrNube) => {
+            let cambio = false;
+            if (Array.isArray(aspNube) && aspNube.length) { aspirantes = aspNube; cambio = true; }
+            if (Array.isArray(usrNube) && usrNube.length) { usuarios = usrNube; cambio = true; }
+            if (!cambio) return;
+            try {
+                localStorage.setItem(LS_ASP, JSON.stringify(aspirantes));
+                localStorage.setItem(LS_USR, JSON.stringify(usuarios));
+            } catch(e) {}
+            try { renderTableAspirantes(aspirantes); renderTableUsuarios(); } catch(e) {}
+        };
 
         function cargarDatos() {
             try {
@@ -3108,6 +3124,98 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             });
         }
 
+    </script>
+
+    <!-- ==========================================
+         PERSISTENCIA EN LA NUBE (Firebase / Firestore)
+         Expedientes de aspirantes y cuentas de psicologos
+         ========================================== -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getFirestore, collection, doc, setDoc, onSnapshot, getDocs
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const badge = document.createElement('div');
+      badge.style.cssText = 'position:fixed;bottom:10px;right:10px;z-index:9999;font:11px system-ui;padding:6px 10px;border-radius:9999px;background:#0f172a;color:#fbbf24;border:1px solid #fbbf24;opacity:.9';
+      badge.textContent = 'Nube: conectando...';
+      document.body.appendChild(badge);
+      const setBadge = (t, ok) => { badge.textContent = 'Nube: ' + t; badge.style.color = ok ? '#34d399' : '#fbbf24'; };
+
+      let db = null, guardando = false, pendiente = null;
+
+      const limpiar = (o) => JSON.parse(JSON.stringify(o));
+
+      async function guardar(aspirantes, usuarios) {
+        if (!db) return;
+        if (guardando) { pendiente = [aspirantes, usuarios]; return; }
+        guardando = true;
+        try {
+          await Promise.all([
+            ...aspirantes.map(a => setDoc(doc(db, 'aspirantes', String(a.id)), limpiar(a), { merge: true })),
+            ...usuarios.map(u => setDoc(doc(db, 'usuarios', String(u.login)), limpiar(u), { merge: true })),
+          ]);
+          setBadge('sincronizado', true);
+        } catch (e) {
+          console.error('Error guardando en la nube', e);
+          setBadge('sin sincronizar', false);
+        } finally {
+          guardando = false;
+          if (pendiente) { const [a, u] = pendiente; pendiente = null; guardar(a, u); }
+        }
+      }
+
+      window.PsicoCloud = { guardar: (a, u) => guardar(a, u), listo: false };
+
+      async function iniciar() {
+        let config;
+        try {
+          const res = await fetch('/api/public/firebase-config');
+          config = await res.json();
+          if (!config || !config.apiKey) throw new Error('Configuracion incompleta');
+        } catch (e) {
+          console.warn('Sin configuracion de nube, se usa almacenamiento local', e);
+          setBadge('local', false);
+          return;
+        }
+
+        const app = initializeApp(config);
+        db = getFirestore(app);
+        window.PsicoCloud.listo = true;
+
+        // Carga inicial: si la nube esta vacia, se suben los datos locales.
+        try {
+          const [snapA, snapU] = await Promise.all([
+            getDocs(collection(db, 'aspirantes')),
+            getDocs(collection(db, 'usuarios')),
+          ]);
+          const nubeAsp = snapA.docs.map(d => d.data());
+          const nubeUsr = snapU.docs.map(d => d.data());
+          if (nubeAsp.length || nubeUsr.length) {
+            window.__psicoAplicarNube(nubeAsp, nubeUsr);
+          }
+          const local = window.__psicoLeerDatos();
+          if (!nubeAsp.length || !nubeUsr.length) await guardar(local.aspirantes, local.usuarios);
+          setBadge('sincronizado', true);
+        } catch (e) {
+          console.error('Error leyendo la nube', e);
+          setBadge('sin conexion', false);
+        }
+
+        // Sincronizacion en tiempo real entre equipos
+        onSnapshot(collection(db, 'aspirantes'), (snap) => {
+          window.__psicoAplicarNube(snap.docs.map(d => d.data()), null);
+        });
+        onSnapshot(collection(db, 'usuarios'), (snap) => {
+          window.__psicoAplicarNube(null, snap.docs.map(d => d.data()));
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciar);
+      } else {
+        iniciar();
+      }
     </script>
 </body>
 </html>
