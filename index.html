@@ -3215,10 +3215,12 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
           window.__psicoAplicarNube(null, snap.docs.map(d => d.data()));
         });
       }
+      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', iniciar);
       } else {
         iniciar();
       }
+      
     </script>
 </body>
 </html>
