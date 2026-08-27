@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psicocafma - Selección Psicológica Militar</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -177,7 +178,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-xl border-2 border-gold-accent bg-white flex items-center justify-center overflow-hidden shadow-md">
-                    <img src="https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/a5da8949-2f33-433f-879c-a71a6fcaf09f/escudo-ceifam.jpg" alt="Escudo del Centro de Adiestramiento Fisiológico y Medicina Aeroespacial" class="w-full h-full object-cover">
+                    <img src="/escudo-cafma.jpg" alt="Escudo del Centro de Adiestramiento Fisiológico y Medicina Aeroespacial" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h1 class="text-lg font-bold tracking-wider uppercase military-title text-amber-100">Psicocafma</h1>
@@ -245,7 +246,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             <div id="aspirante-registro" class="bg-white border rounded-3xl p-6 md:p-10 shadow-xl max-w-2xl mx-auto space-y-6 border-t-8 border-gold-accent">
                 <div class="text-center space-y-2">
                     <div class="w-16 h-16 rounded-2xl border-2 border-gold-accent bg-white flex items-center justify-center mx-auto overflow-hidden shadow-md">
-                        <img src="https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/8175eea1-69d8-4739-9d94-9e908c9dfe76/logo_cafma.jpg" alt="Escudo del Centro de Adiestramiento Fisiológico y Medicina Aeroespacial" class="w-full h-full object-cover">
+                        <img src="/escudo-cafma.jpg" alt="Escudo del Centro de Adiestramiento Fisiológico y Medicina Aeroespacial" class="w-full h-full object-cover">
                     </div>
                     <h2 class="text-xl font-bold navy-blue military-title">Registro de Evaluación Psicológica</h2>
                     <p class="text-xs text-slate-500">Ingrese sus datos de filiación militar para dar inicio a las pruebas psicométricas.</p>
@@ -351,7 +352,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             <!-- 4. Test d2 (Atención Selectiva - 47 estímulos por fila) -->
             <div id="aspirante-test-d2" class="bg-white border rounded-3xl p-6 shadow-xl max-w-6xl mx-auto space-y-6 hidden flex-col">
                 <div class="text-center space-y-2 border-b pb-4">
-                    <h3 class="font-bold text-navy-blue text-xl uppercase military-title">Test d2 (Atención Selectiva y Concentración)</h3>
+                    <h3 class="font-bold text-navy-blue text-xl uppercase military-title">d2 (Prueba de Atención)</h3>
                     <p class="text-xs text-slate-600 max-w-3xl mx-auto">
                         Seleccione ÚNICAMENTE las letras <strong>'d'</strong> que tengan exactamente <strong>DOS rayitas</strong> (2 arriba, 2 abajo o 1 arriba y 1 abajo).
                         Al seleccionar se marcará una <strong>/</strong> sobre el estímulo. Ignore las 'p' y las 'd' con cantidad distinta de 2 rayitas. Cada fila tiene <strong>47 estímulos</strong> (21 correctos y 26 distractores). Duración: 20s por fila.
@@ -361,7 +362,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 <!-- RELOJ ROJO GRANDE Y ENCABEZADO -->
                 <div class="flex flex-col items-center justify-center space-y-1">
                     <div class="text-5xl font-black text-red-600 font-mono tracking-wider drop-shadow-md border-4 border-red-200 bg-red-50 px-8 py-2 rounded-2xl animate-pulse">
-                        <span id="d2-timer-big">27</span>s
+                        <span id="d2-timer-big">22</span>s
                     </div>
                     <span class="text-[10px] uppercase font-bold text-red-500 tracking-widest">Tiempo Restante de la Línea</span>
                 </div>
@@ -393,7 +394,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             <!-- 5. Test de Raven (Matrices reales: Escala General SPM / Escala Avanzada APM) -->
             <div id="aspirante-test-raven" class="bg-white border rounded-3xl p-6 shadow-xl max-w-3xl mx-auto space-y-5 hidden flex-col min-h-[60vh] text-center">
                 <div class="border-b pb-4">
-                    <h3 id="raven-title" class="font-bold text-navy-blue text-xl uppercase military-title">Test de Matrices Progresivas de Raven</h3>
+                    <h3 id="raven-title" class="font-bold text-navy-blue text-xl uppercase military-title">Raven (Prueba de Razonamiento)</h3>
                     <p id="raven-instruccion" class="text-xs text-slate-500 mt-2">Observe la matriz. Falta una parte. Seleccione, entre las opciones numeradas, la pieza que completa lógicamente el patrón.</p>
                 </div>
                 <div class="flex justify-between items-center w-full px-4 border bg-slate-50 p-2 rounded-xl">
@@ -419,7 +420,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             <!-- 6. Test Stroop (3 Fases: Palabra, Color, Interferencia - 100 estimulos c/u - 40s) -->
             <div id="aspirante-test-stroop" class="bg-white border rounded-3xl p-6 shadow-xl max-w-3xl mx-auto space-y-6 hidden flex-col text-center">
                 <div class="border-b pb-4 space-y-1">
-                    <h3 class="font-bold text-navy-blue text-xl uppercase military-title">Test de Stroop (Evaluación de Interferencia)</h3>
+                    <h3 class="font-bold text-navy-blue text-xl uppercase military-title">Stroop (Prueba de Concentración)</h3>
                     <p id="stroop-phase-instruction" class="text-xs text-slate-600 font-semibold max-w-xl mx-auto">
                         Fase 1: Seleccione la palabra leída.
                     </p>
@@ -1093,7 +1094,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
 
         const RUTAS_EVALUACION = {
             'ASIMILADOS': ['pai', 'd2', 'stroop'],
-            'AMAB': ['16pf', 'raven_adv'],
+            'AMAB': ['pai', 'raven_adv'],
             'EFOTROP': ['pai', 'raven_gen'],
             'CEFOC': ['pai'],
             'ALUMNO_PILOTO': ['raven_adv', 'd2', '16pf'],
@@ -1106,12 +1107,12 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         const RAVEN_AVANZADO_S2 = [{"id": "II-1", "serie": "II", "num": 1, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/7f32e067-6562-4eb6-8d11-9be8544726f9/adv2_01.jpg", "op": 8, "clave": 5}, {"id": "II-2", "serie": "II", "num": 2, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/a186beb3-919e-48bd-93af-db358a68727b/adv2_02.jpg", "op": 8, "clave": 1}, {"id": "II-3", "serie": "II", "num": 3, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/8423dc75-08a4-4db4-8799-9ead7e158515/adv2_03.jpg", "op": 8, "clave": 7}, {"id": "II-4", "serie": "II", "num": 4, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/384dde9f-5586-4018-a3a5-a32eb1092121/adv2_04.jpg", "op": 8, "clave": 4}, {"id": "II-5", "serie": "II", "num": 5, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/ba3102bd-a45d-428d-9704-f0a50ce16f4d/adv2_05.jpg", "op": 8, "clave": 3}, {"id": "II-6", "serie": "II", "num": 6, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/791eb893-53de-4534-b1b7-f4fa616c5ef2/adv2_06.jpg", "op": 8, "clave": 1}, {"id": "II-7", "serie": "II", "num": 7, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/b1be7bca-40af-43e9-8e75-7fcb665a6d74/adv2_07.jpg", "op": 8, "clave": 6}, {"id": "II-8", "serie": "II", "num": 8, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/cc135a46-fddf-4419-83c3-a836005185cb/adv2_08.jpg", "op": 8, "clave": 1}, {"id": "II-9", "serie": "II", "num": 9, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/39e95575-2e9f-4cef-810d-d2f88540f4e8/adv2_09.jpg", "op": 8, "clave": 8}, {"id": "II-10", "serie": "II", "num": 10, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/ee7a8957-b798-459b-b842-9b21489727c2/adv2_10.jpg", "op": 8, "clave": 4}, {"id": "II-11", "serie": "II", "num": 11, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/0137e02b-ecb2-41d3-8423-cb64c9125783/adv2_11.jpg", "op": 8, "clave": 5}, {"id": "II-12", "serie": "II", "num": 12, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/f1d433a4-9ac4-41a5-ab5a-72fca7e606cc/adv2_12.jpg", "op": 8, "clave": 6}, {"id": "II-13", "serie": "II", "num": 13, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/c89be200-caca-42a8-910f-3ec3aa92f8b1/adv2_13.jpg", "op": 8, "clave": 2}, {"id": "II-14", "serie": "II", "num": 14, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/c788191e-db24-499f-97ea-5c4f6db31470/adv2_14.jpg", "op": 8, "clave": 1}, {"id": "II-15", "serie": "II", "num": 15, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/f6a87a0c-576d-4efd-ab8e-af65feed2206/adv2_15.jpg", "op": 8, "clave": 2}, {"id": "II-16", "serie": "II", "num": 16, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/3e11e1ef-40f1-49ba-82a6-9ed42e2596ee/adv2_16.jpg", "op": 8, "clave": 4}, {"id": "II-17", "serie": "II", "num": 17, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/1f0a98aa-309f-42ef-ad98-94d3af8b6463/adv2_17.jpg", "op": 8, "clave": 6}, {"id": "II-18", "serie": "II", "num": 18, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/ddf5eb52-2c5d-41f5-937a-02459d04c060/adv2_18.jpg", "op": 8, "clave": 7}, {"id": "II-19", "serie": "II", "num": 19, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/9459e118-9bb0-4ee2-bf06-0a88b82e06f7/adv2_19.jpg", "op": 8, "clave": 3}, {"id": "II-20", "serie": "II", "num": 20, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/d061bd0b-b9d1-4441-b7de-017ee0d9ccaf/adv2_20.jpg", "op": 8, "clave": 8}, {"id": "II-21", "serie": "II", "num": 21, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/fcae76a4-c5a5-4b9e-8b2c-497b4895f213/adv2_21.jpg", "op": 8, "clave": 8}, {"id": "II-22", "serie": "II", "num": 22, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/3857db2f-21b7-4782-91a6-991a752834df/adv2_22.jpg", "op": 8, "clave": 7}, {"id": "II-23", "serie": "II", "num": 23, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/e469ec2e-1fb5-4334-a7b7-0ee1a5beb0b8/adv2_23.jpg", "op": 8, "clave": 6}, {"id": "II-24", "serie": "II", "num": 24, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/a53794e2-91c4-4e80-869f-f4f154caadcf/adv2_24.jpg", "op": 8, "clave": 3}, {"id": "II-25", "serie": "II", "num": 25, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/1e98c16e-7101-4c36-ac17-d4b55b129342/adv2_25.jpg", "op": 8, "clave": 7}, {"id": "II-26", "serie": "II", "num": 26, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/52807e86-3082-4173-9619-936991aa54d3/adv2_26.jpg", "op": 8, "clave": 2}, {"id": "II-27", "serie": "II", "num": 27, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/4b673ac7-d9bf-4cef-b83f-de1dbeff8404/adv2_27.jpg", "op": 8, "clave": 7}, {"id": "II-28", "serie": "II", "num": 28, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/6f21639a-7f9f-4b4b-b4ee-83eda773b8d1/adv2_28.jpg", "op": 8, "clave": 5}, {"id": "II-29", "serie": "II", "num": 29, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/e7942400-fff1-4204-97cc-86f92a3c1203/adv2_29.jpg", "op": 8, "clave": 6}, {"id": "II-30", "serie": "II", "num": 30, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/9537794e-37e0-4089-9b07-f6c0e7b0542e/adv2_30.jpg", "op": 8, "clave": 5}, {"id": "II-31", "serie": "II", "num": 31, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/1e44f525-2afc-42da-bf98-4208523e13e7/adv2_31.jpg", "op": 8, "clave": 4}, {"id": "II-32", "serie": "II", "num": 32, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/1f4eafdd-9294-4211-9655-74bc48616f4e/adv2_32.jpg", "op": 8, "clave": 8}, {"id": "II-33", "serie": "II", "num": 33, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/e82a3aaa-9970-43a5-bc93-1fa4798138a5/adv2_33.jpg", "op": 8, "clave": 5}, {"id": "II-34", "serie": "II", "num": 34, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/5cff76f7-6070-441d-ab9f-91497a901984/adv2_34.jpg", "op": 8, "clave": 1}, {"id": "II-35", "serie": "II", "num": 35, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/254521c6-82d6-4e19-8fce-83b70e97a887/adv2_35.jpg", "op": 8, "clave": 3}, {"id": "II-36", "serie": "II", "num": 36, "img": "https://project--c4f98a67-20c3-4401-8774-8f84fd0db4b8-dev.lovable.app/__l5e/assets-v1/56854bc2-3c11-4cbd-b825-3c26fc075c87/adv2_36.jpg", "op": 8, "clave": 2}];
 
         const TESTS_DB = {
-            '16pf': { id:'16pf', nombre: '16 PF-5', desc: 'Cuestionario de Personalidad', icon: 'file-question', color: 'blue', isReal: true, dataSource: 'PREGUNTAS_16PF' },
-            'pai': { id:'pai', nombre: 'Inventario PAI', desc: 'Personalidad y Psicopatología', icon: 'clipboard-list', color: 'emerald', isReal: true, dataSource: 'PREGUNTAS_PAI' },
-            'd2': { id:'d2', nombre: 'Test d2', desc: 'Atención y Concentración Selectiva (47 Estímulos)', icon: 'eye', color: 'amber', isReal: false },
-            'stroop': { id:'stroop', nombre: 'Test Stroop', desc: 'Tolerancia al Estrés / Interferencia', icon: 'palette', color: 'rose', isReal: false },
-            'raven_adv': { id:'raven_adv', nombre: 'Raven Avanzado (APM)', desc: 'Inteligencia Fluida · Serie I (12) + Serie II (36)', icon: 'grid', color: 'indigo', isReal: true, dataSource: 'RAVEN_AVANZADO_S2' },
-            'raven_gen': { id:'raven_gen', nombre: 'Raven General (SPM)', desc: 'Inteligencia Fluida · 60 matrices (Series A-E)', icon: 'grid', color: 'indigo', isReal: true, dataSource: 'RAVEN_GENERAL' }
+            '16pf': { id:'16pf', nombre: '16 PF', desc: 'Cuestionario de Personalidad', icon: 'file-question', color: 'blue', isReal: true, dataSource: 'PREGUNTAS_16PF' },
+            'pai': { id:'pai', nombre: 'PAI', desc: 'Inventario de Personalidad', icon: 'clipboard-list', color: 'emerald', isReal: true, dataSource: 'PREGUNTAS_PAI' },
+            'd2': { id:'d2', nombre: 'd2', desc: 'Prueba de Atención', icon: 'eye', color: 'amber', isReal: false },
+            'stroop': { id:'stroop', nombre: 'Stroop', desc: 'Prueba de Concentración', icon: 'palette', color: 'rose', isReal: false },
+            'raven_adv': { id:'raven_adv', nombre: 'Raven Avanzado', desc: 'Prueba de Razonamiento', icon: 'grid', color: 'indigo', isReal: true, dataSource: 'RAVEN_AVANZADO_S2' },
+            'raven_gen': { id:'raven_gen', nombre: 'Raven General', desc: 'Prueba de Razonamiento', icon: 'grid', color: 'indigo', isReal: true, dataSource: 'RAVEN_GENERAL' }
         };
 
         // =========================================================================
@@ -1764,7 +1765,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         // Tiempo: 27s por línea. Reloj Rojo Grande Arriba.
         let d2LineaActual = 0;
         let d2TimerInterval = null;
-        let d2TimeRemaining = 27;
+        let d2TimeRemaining = 22;
         let d2DataLineas = []; // Guarda los 47 estímulos por línea
         let d2Respuestas = []; // Guarda selecciones por línea: array de Sets de índices seleccionados
         let d2ProcesadosMax = []; // Guarda el índice del último elemento alcanzado/marcado por línea (TR+)
@@ -1785,7 +1786,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
 
             document.getElementById('lbl-d2-btn').innerText = "Comenzar Línea 1";
             document.getElementById('d2-line-indicator').innerText = "1";
-            document.getElementById('d2-timer-big').innerText = "27";
+            document.getElementById('d2-timer-big').innerText = "22";
             document.getElementById('btn-d2-start').disabled = false;
             renderizarLineaD2(0);
         }
@@ -1900,7 +1901,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             document.getElementById('lbl-d2-btn').innerText = `Línea en Curso...`;
             document.getElementById('btn-d2-start').disabled = true;
 
-            d2TimeRemaining = 27;
+            d2TimeRemaining = 22;
             document.getElementById('d2-timer-big').innerText = d2TimeRemaining;
 
             renderizarLineaD2(d2LineaActual);
@@ -2171,8 +2172,11 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 index: 0,
                 answers: new Array(items.length).fill(undefined),
                 timer: null,
-                remaining: esAvanzado ? 40 * 60 : 45 * 60,
-                entrenamiento: esAvanzado ? RAVEN_AVANZADO_S1.length : 0
+                remaining: esAvanzado ? 5 * 60 : 45 * 60,
+                entrenamiento: esAvanzado ? RAVEN_AVANZADO_S1.length : 0,
+                fase: esAvanzado ? 'I' : null,
+                tiempoSerieI: 5 * 60,
+                tiempoSerieII: 40 * 60
             };
 
             document.getElementById('aspirante-test-raven').classList.remove('hidden');
@@ -2195,7 +2199,15 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 if (ravenEngine.remaining <= 0) {
                     clearInterval(ravenEngine.timer);
                     ravenEngine.timer = null;
-                    finalizarRaven();
+                    if (ravenEngine.id === 'raven_adv' && ravenEngine.fase === 'I') {
+                        // Se agotó el tiempo de la Serie I (entrenamiento): pasa a la Serie II
+                        const iniSerieII = ravenEngine.items.findIndex(x => x.serie !== 'I');
+                        ravenEngine.index = iniSerieII >= 0 ? iniSerieII : ravenEngine.index;
+                        iniciarSerieIIRaven();
+                        mostrarRaven();
+                    } else {
+                        finalizarRaven();
+                    }
                 }
             }, 1000);
         }
@@ -2206,7 +2218,21 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             document.getElementById('raven-timer').innerText = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
         }
 
+        function iniciarSerieIIRaven() {
+            ravenEngine.fase = 'II';
+            ravenEngine.remaining = ravenEngine.tiempoSerieII;
+            iniciarCronometroRaven();
+        }
+
+        function sincronizarFaseRaven() {
+            if (ravenEngine.id !== 'raven_adv') return;
+            const it = ravenEngine.items[ravenEngine.index];
+            if (!it) return;
+            if (it.serie !== 'I' && ravenEngine.fase === 'I') iniciarSerieIIRaven();
+        }
+
         function mostrarRaven() {
+            sincronizarFaseRaven();
             const total = ravenEngine.items.length;
             const it = ravenEngine.items[ravenEngine.index];
             const etiquetaSerie = ravenEngine.id === 'raven_adv'
@@ -2299,7 +2325,28 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             renderizarDashboardAspirante();
             document.getElementById('aspirante-dashboard').classList.remove('hidden');
         }
-        function finalizarDashboardAspirante() { document.getElementById('aspirante-dashboard').classList.add('hidden'); document.getElementById('aspirante-fin').classList.remove('hidden'); }
+        async function finalizarDashboardAspirante() {
+            // Marca la evaluación como concluida y guarda los resultados en la nube
+            try {
+                if (aspiranteActual) {
+                    aspiranteActual.evaluacionConcluida = true;
+                    aspiranteActual.fechaConclusion = new Date().toISOString();
+                    aspiranteActual.estado = aspiranteActual.estado === 'EVALUADO' ? aspiranteActual.estado : 'POR CALIFICAR';
+                }
+            } catch (e) { console.warn('No se pudo marcar la conclusión', e); }
+
+            guardarDatos();
+
+            document.getElementById('aspirante-dashboard').classList.add('hidden');
+            document.getElementById('aspirante-fin').classList.remove('hidden');
+
+            // Confirmación explícita de sincronización con la nube
+            try {
+                if (window.PsicoCloud && window.PsicoCloud.listo) {
+                    await window.PsicoCloud.guardar(aspirantes, usuarios);
+                }
+            } catch (e) { console.warn('No se pudo sincronizar con la nube', e); }
+        }
 
 
         // ==========================================
@@ -3098,7 +3145,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         // HOJA DE CORRECCIÓN 16 PF-5 (VISTA DEL PSICÓLOGO)
         // ==========================================
         let chart16pfInstance = null;
-        const PROCESOS_16PF = ['AMAB', 'ALUMNO_PILOTO', 'REEVALUACION'];
+        const PROCESOS_16PF = ['ALUMNO_PILOTO', 'REEVALUACION'];
 
         function renderSeccion16PF() {
             const seccion = document.getElementById('seccion-16pf-psicologo');
