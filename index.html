@@ -170,6 +170,9 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             canvas { max-width: 100% !important; height: auto !important; }
         }
     </style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col antialiased">
 
@@ -1512,8 +1515,13 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 localStorage.setItem(LS_ASP, JSON.stringify(aspirantes));
                 localStorage.setItem(LS_USR, JSON.stringify(usuarios));
             } catch(e) { console.warn('No se pudo guardar localmente', e); }
-            // Respaldo en la nube (Firebase)
-            try { window.PsicoCloud && window.PsicoCloud.guardar(aspirantes, usuarios); } catch(e) { console.warn('Nube no disponible', e); }
+            // Respaldo en la nube (Firebase) — se retorna la promesa para poder await
+            try {
+                if (window.PsicoCloud && window.PsicoCloud.guardar) {
+                    return window.PsicoCloud.guardar(aspirantes, usuarios);
+                }
+            } catch(e) { console.warn('Nube no disponible', e); }
+            return Promise.resolve();
         }
 
         // Puente con el modulo de nube (Firebase)
@@ -1723,7 +1731,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         }
         function seleccionarOpcionReal(idx) { currentTestEngine.answers[currentTestEngine.index] = idx; mostrarPreguntaReal(); setTimeout(() => cambiarPreguntaTest(1), 150); }
         function cambiarPreguntaTest(dir) { const n = currentTestEngine.index + dir; if(n>=0 && n<currentTestEngine.data.length) { currentTestEngine.index = n; mostrarPreguntaReal(); } }
-        function completarPruebaReal() {
+        async function completarPruebaReal() {
             const resp = currentTestEngine.answers.filter(a=>a!==undefined).length; const total = currentTestEngine.data.length;
             if(resp < total) return showMsg("Incompleto", `Faltan ${total - resp} preguntas por responder.`);
             if (currentTestEngine.id === 'pai') {
@@ -1752,7 +1760,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 aspiranteActual.resultados[currentTestEngine.id] = { completado: true, score: 'Completado' };
             }
             document.getElementById('aspirante-test-real').classList.add('hidden');
-            guardarDatos();
+            await guardarDatos();
             retornarDashboardAspirante(currentTestEngine.id);
         }
 
@@ -1934,7 +1942,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             }
         }
 
-        function finalizarTestD2() {
+        async function finalizarTestD2() {
             if(d2TimerInterval) clearInterval(d2TimerInterval);
             d2TimerInterval = null;
 
@@ -1994,7 +2002,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 conclusion: conclusion
             };
 
-            guardarDatos();
+            await guardarDatos();
             document.getElementById('aspirante-test-d2').classList.add('hidden');
             retornarDashboardAspirante('d2');
         }
@@ -2108,7 +2116,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             siguienteEstimuloStroop();
         }
 
-        function finalizarFaseStroop() {
+        async function finalizarFaseStroop() {
             if(stroopFase === 1) stroopHitsP = stroopAciertosFase;
             else if(stroopFase === 2) stroopHitsC = stroopAciertosFase;
             else if(stroopFase === 3) stroopHitsPC = stroopAciertosFase;
@@ -2119,17 +2127,21 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 iniciarFaseStroop(proxima);
             } else {
                 // Finalizó las 3 fases
-                aspiranteActual.resultados['stroop'] = {
-                    completado: true,
-                    score: `P: ${stroopHitsP}/100 | C: ${stroopHitsC}/100 | PC: ${stroopHitsPC}/100`,
-                    pHits: stroopHitsP,
-                    cHits: stroopHitsC,
-                    pcHits: stroopHitsPC
-                };
-                guardarDatos();
-                document.getElementById('aspirante-test-stroop').classList.add('hidden');
-                retornarDashboardAspirante('stroop');
+                await finalizarStroop();
             }
+        }
+
+        async function finalizarStroop() {
+            aspiranteActual.resultados['stroop'] = {
+                completado: true,
+                score: `P: ${stroopHitsP}/100 | C: ${stroopHitsC}/100 | PC: ${stroopHitsPC}/100`,
+                pHits: stroopHitsP,
+                cHits: stroopHitsC,
+                pcHits: stroopHitsPC
+            };
+            await guardarDatos();
+            document.getElementById('aspirante-test-stroop').classList.add('hidden');
+            retornarDashboardAspirante('stroop');
         }
 
         // ==========================================
@@ -2277,7 +2289,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             else finalizarRaven();
         }
 
-        function finalizarRaven() {
+        async function finalizarRaven() {
             if (ravenEngine.timer) { clearInterval(ravenEngine.timer); ravenEngine.timer = null; }
 
             const esAvanzado = ravenEngine.id === 'raven_adv';
@@ -2315,7 +2327,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 respuestas: ravenEngine.answers.slice()
             };
 
-            guardarDatos();
+            await guardarDatos();
             document.getElementById('aspirante-test-raven').classList.add('hidden');
             retornarDashboardAspirante(ravenEngine.id);
         }
@@ -2335,7 +2347,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 }
             } catch (e) { console.warn('No se pudo marcar la conclusión', e); }
 
-            guardarDatos();
+            await guardarDatos();
 
             document.getElementById('aspirante-dashboard').classList.add('hidden');
             document.getElementById('aspirante-fin').classList.remove('hidden');
@@ -2553,7 +2565,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             });
         }
 
-        function guardarDictamenFinal() {
+        async function guardarDictamenFinal() {
             const st = document.getElementById('dictamen-status').value;
             const ca = document.getElementById('dictamen-causal').value;
             if (st === 'No Apto' && !ca) return showMsg('Atención', 'Debe indicar la causal o condición de inaptitud.');
@@ -2563,13 +2575,17 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             aspiranteActual.psicologo = usuarioActivo.nombre;
             aspiranteActual.moca = document.getElementById('moca-score').value || '';
             aspiranteActual.certificada = true;
-            guardarDatos();
+            aspiranteActual.fechaCertificacion = new Date().toISOString();
             renderTableAspirantes(aspirantes);
+            await guardarDatos();
             
             document.getElementById('btn-print-exp').classList.remove('hidden');
             document.getElementById('btn-enviar-expediente').classList.add('hidden');
             
-            showMsg('Expediente Certificado', `La evaluación ha sido guardada y certificada exitosamente. Puede proceder a la impresión.`);
+            const sincronizado = window.PsicoCloud && window.PsicoCloud.listo;
+            showMsg('Expediente Certificado', sincronizado
+                ? `La evaluación ha sido guardada, certificada y sincronizada con la nube exitosamente. Puede proceder a la impresión.`
+                : `La evaluación ha sido guardada y certificada localmente. La sincronización con la nube está pendiente.`);
         }
 
         function imprimirExpediente() { window.print(); }
