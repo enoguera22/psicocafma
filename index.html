@@ -157,21 +157,8 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         /* Bender Table Styles */
         .bender-checkbox { width: 1.2rem; height: 1.2rem; cursor: pointer; accent-color: #0F1E36; }
 
-        /* Documentos impresos: Arial 11 en todo el documento */
-        #print-report-container, #print-report-container *,
-        #psico-print-overlay, #psico-print-overlay * {
-            font-family: Arial, Helvetica, sans-serif !important;
-            font-size: 11pt !important;
-            line-height: 1.35 !important;
-        }
-        #psico-print-overlay { display: none; }
-
         /* Impresión (Reportes y Expedientes) */
         @media print {
-            body.print-psico > *:not(#psico-print-overlay) { display: none !important; }
-            body.print-psico #psico-print-overlay,
-            body.print-psico #psico-print-overlay * { display: revert !important; visibility: visible !important; }
-            body.print-psico #psico-print-overlay { display: block !important; position: static !important; width: 100% !important; padding: 0 !important; }
             .no-print, .no-print * { display: none !important; }
             body { background-color: white; margin: 0; padding: 0; }
             .eval-view.hidden { display: none !important; }
@@ -183,6 +170,9 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             canvas { max-width: 100% !important; height: auto !important; }
         }
     </style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col antialiased">
 
@@ -705,9 +695,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                     <button onclick="imprimirExpediente()" id="btn-print-exp" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-xs font-bold shadow flex items-center gap-1.5 hidden">
                         <i data-lucide="printer" class="w-4 h-4"></i> Imprimir Expediente
                     </button>
-                    <button onclick="imprimirReportePsicologico()" id="btn-print-psico" class="bg-navy-blue hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow flex items-center gap-1.5">
-                        <i data-lucide="file-text" class="w-4 h-4"></i> Imprimir Reporte Psicológico
-                    </button>
                 </div>
 
                 <div class="bg-white border rounded-3xl p-6 shadow-xl space-y-6 border-t-8 border-gold-accent">
@@ -1021,47 +1008,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                             </div>
                         </div>
 
-                        <!-- FIGURA COMPLEJA DE REY-OSTERRIETH (SOLO REEVALUACIÓN) -->
-                        <div id="seccion-rey" class="bg-indigo-50/30 border border-indigo-200 rounded-2xl p-5 space-y-4 shadow-sm hidden">
-                            <h4 class="text-xs font-black text-indigo-900 uppercase flex items-center gap-2 military-title justify-center">
-                                Corrección Figura Compleja de Rey-Osterrieth
-                            </h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
-                                <div class="flex items-center gap-2"><span class="font-bold">Nombre:</span><span id="rey-nombre" class="flex-1 border-b border-slate-400"></span></div>
-                                <div class="flex items-center gap-2"><span class="font-bold">Fecha de Nacimiento:</span><span id="rey-fnac" class="flex-1 border-b border-slate-400"></span></div>
-                                <div class="flex items-center gap-2"><span class="font-bold">Fecha de aplicación:</span><span id="rey-fapp" class="flex-1 border-b border-slate-400"></span></div>
-                                <div class="flex items-center gap-2"><span class="font-bold">Edad:</span><span id="rey-edad" class="flex-1 border-b border-slate-400"></span></div>
-                            </div>
-                            <div class="overflow-x-auto border rounded bg-white max-w-md">
-                                <table class="w-full text-left border-collapse text-[10px]">
-                                    <thead class="bg-slate-100">
-                                        <tr><th class="p-1 border">Puntuación</th><th class="p-1 border">Precisión</th><th class="p-1 border">Localización</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td class="p-1 border">2</td><td class="p-1 border">Buena</td><td class="p-1 border">Buena</td></tr>
-                                        <tr><td class="p-1 border">1</td><td class="p-1 border">Buena</td><td class="p-1 border">Mala</td></tr>
-                                        <tr><td class="p-1 border">1</td><td class="p-1 border">Mala</td><td class="p-1 border">Buena</td></tr>
-                                        <tr><td class="p-1 border">0.5</td><td class="p-1 border">Mala, reconocible</td><td class="p-1 border">Mala</td></tr>
-                                        <tr><td class="p-1 border">0</td><td class="p-1 border">Mala, irreconocible</td><td class="p-1 border">Mala</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="overflow-x-auto border rounded bg-white">
-                                <table class="w-full text-left border-collapse text-[10px]">
-                                    <thead class="bg-slate-100">
-                                        <tr>
-                                            <th class="p-1 border">Elementos</th>
-                                            <th class="p-1 border text-center w-24">Copia</th>
-                                            <th class="p-1 border text-center w-24">M. Inmed.</th>
-                                            <th class="p-1 border text-center w-24">M. Diferida</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="rey-tbody"></tbody>
-                                    <tfoot id="rey-tfoot"></tfoot>
-                                </table>
-                            </div>
-                        </div>
-
                         <!-- ANÁLISIS CUALITATIVO -->
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3 shadow-sm">
                             <div class="flex justify-between items-center">
@@ -1155,7 +1101,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             'EFOTROP': ['pai', 'raven_gen'],
             'CEFOC': ['pai'],
             'ALUMNO_PILOTO': ['raven_adv', 'd2', '16pf'],
-            'REEVALUACION': ['pai', 'stroop']
+            'REEVALUACION': ['pai', '16pf', 'raven_gen', 'raven_adv', 'd2', 'stroop']
         };
 
         // BANCO DE MATRICES REALES DEL TEST DE RAVEN (imágenes + clave de corrección)
@@ -1569,16 +1515,44 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 localStorage.setItem(LS_ASP, JSON.stringify(aspirantes));
                 localStorage.setItem(LS_USR, JSON.stringify(usuarios));
             } catch(e) { console.warn('No se pudo guardar localmente', e); }
-            // Respaldo en la nube (Firebase)
-            try { window.PsicoCloud && window.PsicoCloud.guardar(aspirantes, usuarios); } catch(e) { console.warn('Nube no disponible', e); }
+            // Respaldo en la nube (Firebase) — se retorna la promesa para poder await
+            try {
+                if (window.PsicoCloud && window.PsicoCloud.guardar) {
+                    return window.PsicoCloud.guardar(aspirantes, usuarios);
+                }
+            } catch(e) { console.warn('Nube no disponible', e); }
+            return Promise.resolve();
         }
 
         // Puente con el modulo de nube (Firebase)
         window.__psicoLeerDatos = () => ({ aspirantes, usuarios });
         window.__psicoAplicarNube = (aspNube, usrNube) => {
             let cambio = false;
-            if (Array.isArray(aspNube) && aspNube.length) { aspirantes = aspNube; cambio = true; }
-            if (Array.isArray(usrNube) && usrNube.length) { usuarios = usrNube; cambio = true; }
+            if (Array.isArray(aspNube) && aspNube.length) {
+                aspNube.forEach(nuevo => {
+                    const idx = aspirantes.findIndex(a => a.id === nuevo.id);
+                    if (idx >= 0) {
+                        const localRes = aspirantes[idx].resultados || {};
+                        const nubeRes = nuevo.resultados || {};
+                        const mergedRes = { ...localRes };
+                        Object.keys(nubeRes).forEach(k => {
+                            if (!mergedRes[k] || (nubeRes[k] && nubeRes[k].completado)) mergedRes[k] = nubeRes[k];
+                        });
+                        aspirantes[idx] = { ...nuevo, resultados: mergedRes };
+                    } else {
+                        aspirantes.push(nuevo);
+                    }
+                });
+                cambio = true;
+            }
+            if (Array.isArray(usrNube) && usrNube.length) {
+                usrNube.forEach(nuevo => {
+                    const idx = usuarios.findIndex(u => u.login === nuevo.login);
+                    if (idx >= 0) usuarios[idx] = nuevo;
+                    else usuarios.push(nuevo);
+                });
+                cambio = true;
+            }
             if (!cambio) return;
             try {
                 localStorage.setItem(LS_ASP, JSON.stringify(aspirantes));
@@ -1780,7 +1754,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         }
         function seleccionarOpcionReal(idx) { currentTestEngine.answers[currentTestEngine.index] = idx; mostrarPreguntaReal(); setTimeout(() => cambiarPreguntaTest(1), 150); }
         function cambiarPreguntaTest(dir) { const n = currentTestEngine.index + dir; if(n>=0 && n<currentTestEngine.data.length) { currentTestEngine.index = n; mostrarPreguntaReal(); } }
-        function completarPruebaReal() {
+        async function completarPruebaReal() {
             const resp = currentTestEngine.answers.filter(a=>a!==undefined).length; const total = currentTestEngine.data.length;
             if(resp < total) return showMsg("Incompleto", `Faltan ${total - resp} preguntas por responder.`);
             if (currentTestEngine.id === 'pai') {
@@ -1809,7 +1783,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 aspiranteActual.resultados[currentTestEngine.id] = { completado: true, score: 'Completado' };
             }
             document.getElementById('aspirante-test-real').classList.add('hidden');
-            guardarDatos();
+            await guardarDatos();
             retornarDashboardAspirante(currentTestEngine.id);
         }
 
@@ -1991,7 +1965,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             }
         }
 
-        function finalizarTestD2() {
+        async function finalizarTestD2() {
             if(d2TimerInterval) clearInterval(d2TimerInterval);
             d2TimerInterval = null;
 
@@ -2051,7 +2025,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 conclusion: conclusion
             };
 
-            guardarDatos();
+            await guardarDatos();
             document.getElementById('aspirante-test-d2').classList.add('hidden');
             retornarDashboardAspirante('d2');
         }
@@ -2165,7 +2139,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             siguienteEstimuloStroop();
         }
 
-        function finalizarFaseStroop() {
+        async function finalizarFaseStroop() {
             if(stroopFase === 1) stroopHitsP = stroopAciertosFase;
             else if(stroopFase === 2) stroopHitsC = stroopAciertosFase;
             else if(stroopFase === 3) stroopHitsPC = stroopAciertosFase;
@@ -2176,17 +2150,21 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 iniciarFaseStroop(proxima);
             } else {
                 // Finalizó las 3 fases
-                aspiranteActual.resultados['stroop'] = {
-                    completado: true,
-                    score: `P: ${stroopHitsP}/100 | C: ${stroopHitsC}/100 | PC: ${stroopHitsPC}/100`,
-                    pHits: stroopHitsP,
-                    cHits: stroopHitsC,
-                    pcHits: stroopHitsPC
-                };
-                guardarDatos();
-                document.getElementById('aspirante-test-stroop').classList.add('hidden');
-                retornarDashboardAspirante('stroop');
+                await finalizarStroop();
             }
+        }
+
+        async function finalizarStroop() {
+            aspiranteActual.resultados['stroop'] = {
+                completado: true,
+                score: `P: ${stroopHitsP}/100 | C: ${stroopHitsC}/100 | PC: ${stroopHitsPC}/100`,
+                pHits: stroopHitsP,
+                cHits: stroopHitsC,
+                pcHits: stroopHitsPC
+            };
+            await guardarDatos();
+            document.getElementById('aspirante-test-stroop').classList.add('hidden');
+            retornarDashboardAspirante('stroop');
         }
 
         // ==========================================
@@ -2334,7 +2312,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             else finalizarRaven();
         }
 
-        function finalizarRaven() {
+        async function finalizarRaven() {
             if (ravenEngine.timer) { clearInterval(ravenEngine.timer); ravenEngine.timer = null; }
 
             const esAvanzado = ravenEngine.id === 'raven_adv';
@@ -2372,7 +2350,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 respuestas: ravenEngine.answers.slice()
             };
 
-            guardarDatos();
+            await guardarDatos();
             document.getElementById('aspirante-test-raven').classList.add('hidden');
             retornarDashboardAspirante(ravenEngine.id);
         }
@@ -2392,7 +2370,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 }
             } catch (e) { console.warn('No se pudo marcar la conclusión', e); }
 
-            guardarDatos();
+            await guardarDatos();
 
             document.getElementById('aspirante-dashboard').classList.add('hidden');
             document.getElementById('aspirante-fin').classList.remove('hidden');
@@ -2435,8 +2413,9 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                         <td class="p-3 text-center"><span class="bg-amber-50 text-amber-800 px-2 py-1 rounded text-[10px] font-bold border border-amber-200">${a.proceso}</span></td>
                         <td class="p-3 text-center text-[10px] font-bold uppercase text-slate-600">${a.psicologo}</td>
                         <td class="p-3 text-center"><span class="px-2 py-1 rounded text-[10px] font-bold ${sColor}">${a.status}</span></td>
-                        <td class="p-3 text-center">
-                            <button onclick="abrirExpediente(${a.id})" class="bg-navy-blue text-white p-2 rounded-lg shadow hover:bg-slate-800 transition-colors"><i data-lucide="folder-open" class="w-4 h-4"></i></button>
+                        <td class="p-3 text-center flex items-center justify-center gap-1">
+                            <button onclick="abrirExpediente(${a.id})" class="bg-navy-blue text-white p-2 rounded-lg shadow hover:bg-slate-800 transition-colors" title="Abrir expediente"><i data-lucide="folder-open" class="w-4 h-4"></i></button>
+                            <button onclick="eliminarAspirante(${a.id})" class="bg-rose-600 text-white p-2 rounded-lg shadow hover:bg-rose-700 transition-colors" title="Eliminar expediente"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </td>
                     </tr>`;
             });
@@ -2506,13 +2485,9 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
 
             // Condicionales por proceso
             document.getElementById('seccion-moca').classList.toggle('hidden', aspiranteActual.proceso !== 'CEFOC');
-            const esReeval = aspiranteActual.proceso === 'REEVALUACION';
-            const showBender = !esReeval;
+            const showBender = true;
             document.getElementById('seccion-bender').classList.toggle('hidden', !showBender);
             if(showBender) generarTablaBender();
-            document.getElementById('seccion-rey').classList.toggle('hidden', !esReeval);
-            if(esReeval) generarTablaRey();
-
 
             // HOJA DE CALIFICACIÓN PAI (si el aspirante presentó el inventario)
             renderSeccionPAI();
@@ -2574,73 +2549,6 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             else { diagEl.innerText = "Compromiso viso-espacial"; diagEl.className = "text-sm font-black text-rose-600 uppercase"; }
         }
 
-        // --- FIGURA COMPLEJA DE REY-OSTERRIETH (REEVALUACIÓN) ---
-        const REY_ELEMENTOS = [
-            'Cruz exterior, ángulo superior izquierdo',
-            'Rectángulo grande, armazón de la figura',
-            'Cruz de San Andrés, diagonal del rectángulo grande',
-            'Mediana horizontal del rectángulo grande 2',
-            'Mediana vertical del rectángulo grande 2',
-            'Rectángulo pequeño en rectángulo grande',
-            'Segmento pequeño sobre el rectángulo 6',
-            '4 líneas paralelas en triangulo superior izquierdo',
-            'Triangulo rectángulo sobre rectángulo grande (a la derecha)',
-            'Pequeña perpendicular en cuadrante superior derecha',
-            'Círculo con tres puntos en cuadrante superior derecho',
-            '5 líneas paralelas en cuadrante inferior derecha',
-            'Dos lados externos del triángulo isósceles de la derecha.',
-            'Pequeño rombo en vértice extremo del triángulo 13',
-            'Segmento vertical en el interior del triángulo 13',
-            'Prolongación de la mediana horizontal, altura de triangulo 13',
-            'Cruz en extremo inferior del rectángulo 2',
-            'Cuadrado y diagonal en extremo inferior izquierdo'
-        ];
-        const REY_COLS = ['copia', 'inmed', 'diferida'];
-
-        function generarTablaRey() {
-            const nombreEl = document.getElementById('rey-nombre');
-            if (nombreEl && typeof aspiranteActual === 'object' && aspiranteActual) {
-                nombreEl.innerText = aspiranteActual.nombre || '';
-                document.getElementById('rey-edad').innerText = aspiranteActual.edad ? `${aspiranteActual.edad} años` : '';
-                document.getElementById('rey-fnac').innerText = aspiranteActual.fechaNacimiento || '';
-                document.getElementById('rey-fapp').innerText = new Date().toLocaleDateString('es-VE');
-            }
-            const tbody = document.getElementById('rey-tbody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            REY_ELEMENTOS.forEach((txt, i) => {
-                let fila = `<tr><td class="p-1 border">${i+1}. ${txt}</td>`;
-                REY_COLS.forEach(c => {
-                    fila += `<td class="p-1 border text-center"><select class="rey-${c} w-full text-center text-[10px] outline-none bg-transparent" onchange="calcularRey()"><option value=""></option><option value="2">2</option><option value="1">1</option><option value="0.5">0.5</option><option value="0">0</option></select></td>`;
-                });
-                tbody.innerHTML += fila + '</tr>';
-            });
-            document.getElementById('rey-tfoot').innerHTML = `
-                <tr class="font-bold bg-slate-50"><td class="p-1 border">PUNTAJE TOTAL</td>
-                    <td class="p-1 border text-center" id="rey-total-copia">0</td>
-                    <td class="p-1 border text-center" id="rey-total-inmed">0</td>
-                    <td class="p-1 border text-center" id="rey-total-diferida">0</td></tr>
-                <tr class="font-bold"><td class="p-1 border">TIEMPO TOTAL</td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td></tr>
-                <tr class="font-bold"><td class="p-1 border">TIPO DE COPIA</td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td>
-                    <td class="p-1 border"><input type="text" class="w-full text-center text-[10px] outline-none bg-transparent"></td></tr>`;
-            calcularRey();
-        }
-
-        function calcularRey() {
-            REY_COLS.forEach(c => {
-                let total = 0;
-                document.querySelectorAll(`.rey-${c}`).forEach(s => { total += parseFloat(s.value) || 0; });
-                const el = document.getElementById(`rey-total-${c}`);
-                if (el) el.innerText = total;
-            });
-        }
-
-
         // --- EXPEDIENTE Y DICTAMEN ---
         function toggleCausasNoApto() { document.getElementById('causales-no-apto-container').classList.toggle('hidden', document.getElementById('dictamen-status').value !== 'No Apto'); }
         
@@ -2681,7 +2589,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             });
         }
 
-        function guardarDictamenFinal() {
+        async function guardarDictamenFinal() {
             const st = document.getElementById('dictamen-status').value;
             const ca = document.getElementById('dictamen-causal').value;
             if (st === 'No Apto' && !ca) return showMsg('Atención', 'Debe indicar la causal o condición de inaptitud.');
@@ -2691,120 +2599,35 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             aspiranteActual.psicologo = usuarioActivo.nombre;
             aspiranteActual.moca = document.getElementById('moca-score').value || '';
             aspiranteActual.certificada = true;
-            guardarDatos();
+            aspiranteActual.fechaCertificacion = new Date().toISOString();
             renderTableAspirantes(aspirantes);
+            await guardarDatos();
             
             document.getElementById('btn-print-exp').classList.remove('hidden');
             document.getElementById('btn-enviar-expediente').classList.add('hidden');
             
-            showMsg('Expediente Certificado', `La evaluación ha sido guardada y certificada exitosamente. Puede proceder a la impresión.`);
+            const sincronizado = window.PsicoCloud && window.PsicoCloud.listo;
+            showMsg('Expediente Certificado', sincronizado
+                ? `La evaluación ha sido guardada, certificada y sincronizada con la nube exitosamente. Puede proceder a la impresión.`
+                : `La evaluación ha sido guardada y certificada localmente. La sincronización con la nube está pendiente.`);
+        }
+
+        async function eliminarAspirante(id) {
+            const asp = aspirantes.find(a => a.id === id);
+            if (!asp) return;
+            if (!confirm(`¿Eliminar el expediente de ${asp.nombre} (C.I. ${asp.ci})? Esta acción no se puede deshacer.`)) return;
+            aspirantes = aspirantes.filter(a => a.id !== id);
+            try { localStorage.setItem(LS_ASP, JSON.stringify(aspirantes)); } catch(e) {}
+            renderTableAspirantes(aspirantes);
+            try {
+                if (window.PsicoCloud && window.PsicoCloud.eliminar) {
+                    await window.PsicoCloud.eliminar('aspirantes', id);
+                }
+            } catch(e) { console.warn('No se pudo eliminar de la nube', e); }
+            showMsg('Expediente Eliminado', `El expediente de ${asp.nombre} ha sido eliminado localmente y de la nube.`);
         }
 
         function imprimirExpediente() { window.print(); }
-
-        function abrirVentanaImpresion(titulo, cuerpoHtml) {
-            const doc = `<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>${titulo}</title>
-                <style>
-                    @page { size: letter; margin: 15mm; }
-                    * { font-family: Arial, Helvetica, sans-serif !important; font-size: 11pt !important; line-height: 1.35; color: #000; box-sizing: border-box; }
-                    body { margin: 0; padding: 0; }
-                    p { margin: 0 0 2px 0; }
-                    table { border-collapse: collapse; }
-                    img { max-width: 100%; }
-                    .text-center { text-align: center; }
-                </style></head><body>${cuerpoHtml}</body></html>`;
-
-            const w = window.open('', '_blank', 'width=900,height=1000');
-            if (!w) { alert('Permita las ventanas emergentes para poder imprimir el reporte.'); return; }
-            w.document.open();
-            w.document.write(doc);
-            w.document.close();
-            const lanzar = () => { w.focus(); w.print(); };
-            const imgs = Array.from(w.document.images);
-            if (imgs.length === 0 || imgs.every(i => i.complete)) { setTimeout(lanzar, 300); }
-            else {
-                let faltan = imgs.filter(i => !i.complete).length;
-                imgs.filter(i => !i.complete).forEach(i => {
-                    const done = () => { if (--faltan <= 0) setTimeout(lanzar, 200); };
-                    i.onload = done; i.onerror = done;
-                });
-            }
-        }
-
-        function membreteCafma(titulo) {
-            return `
-                <div class="text-center mb-6">
-                    <p style="font-weight:bold;text-transform:uppercase;">República Bolivariana de Venezuela</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Ministerio del Poder Popular para la Defensa</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Aviación Militar Bolivariana</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Dirección Aérea de Logística</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">CAFMA</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">División de Medicina Aeroespacial</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Departamento de Psicología</p>
-                    <div style="border-bottom:2px solid #000;padding:10px 0;margin-bottom:14px;">
-                        <span style="font-weight:bold;text-transform:uppercase;">${titulo}</span>
-                    </div>
-                </div>`;
-        }
-
-        function imprimirReportePsicologico() {
-            if (!aspiranteActual) return;
-            const a = aspiranteActual;
-            const res = a.resultados || {};
-
-            // Columna izquierda: pruebas presentadas (excepto PAI y 16 PF-5)
-            let filas = '';
-            Object.keys(res).filter(k => k !== 'pai' && k !== '16pf').forEach(k => {
-                const nombre = (TESTS_DB[k] && TESTS_DB[k].nombre) || k.toUpperCase();
-                const val = res[k].score || 'Completado';
-                filas += `<tr><td style="border:1px solid #000;padding:4px;font-weight:bold;">${nombre}</td><td style="border:1px solid #000;padding:4px;">${val}</td></tr>`;
-            });
-            if (!filas) filas = `<tr><td style="border:1px solid #000;padding:4px;" colspan="2">Sin pruebas registradas.</td></tr>`;
-
-            // Columna derecha: gráfica de perfil (PAI o 16 PF-5)
-            let img = '', tituloGrafica = '';
-            if (typeof chartPaiProfileInstance !== 'undefined' && chartPaiProfileInstance) {
-                img = chartPaiProfileInstance.toBase64Image();
-                tituloGrafica = 'Perfil PAI (Puntuaciones T)';
-            } else if (typeof chart16pfInstance !== 'undefined' && chart16pfInstance) {
-                img = chart16pfInstance.toBase64Image();
-                tituloGrafica = 'Perfil 16 PF-5 (Decatipos)';
-            }
-            const grafica = img
-                ? `<p style="font-weight:bold;text-align:center;margin-bottom:6px;">${tituloGrafica}</p><img src="${img}" style="width:100%;">`
-                : `<p style="text-align:center;">No presentó PAI ni 16 PF-5.</p>`;
-
-            const conclusion = (document.getElementById('analisis-cualitativo') || {}).value || a.analisis || 'Sin conclusión registrada.';
-            const clasificacion = (document.getElementById('dictamen-status') || {}).value || a.status || 'Sin Clasificar';
-            const causal = (document.getElementById('dictamen-causal') || {}).value || '';
-            const psico = (a.psicologo && a.psicologo !== 'Pendiente') ? a.psicologo : (usuarioActivo ? usuarioActivo.nombre : '');
-
-            const html = `
-                ${membreteCafma('Reporte Psicológico de Pruebas')}
-                <table style="width:100%;margin-bottom:14px;">
-                    <tr><td style="font-weight:bold;">Aspirante:</td><td>${a.nombre}</td><td style="font-weight:bold;">Cédula:</td><td>${a.ci}</td><td style="font-weight:bold;">Edad:</td><td>${a.edad} años</td></tr>
-                </table>
-                <table style="width:100%;table-layout:fixed;">
-                    <tr>
-                        <td style="width:48%;vertical-align:top;padding-right:10px;">
-                            <p style="font-weight:bold;text-transform:uppercase;margin-bottom:6px;">Resultados de las pruebas aplicadas</p>
-                            <table style="width:100%;border-collapse:collapse;">${filas}</table>
-                        </td>
-                        <td style="width:52%;vertical-align:top;padding-left:10px;">${grafica}</td>
-                    </tr>
-                </table>
-                <div style="margin-top:18px;">
-                    <p style="font-weight:bold;text-transform:uppercase;">Conclusión</p>
-                    <p style="white-space:pre-wrap;text-align:justify;">${conclusion}</p>
-                    <p style="margin-top:10px;"><span style="font-weight:bold;text-transform:uppercase;">Clasificación otorgada: </span>${clasificacion}${causal ? ' — ' + causal : ''}</p>
-                </div>
-                <div style="margin-top:40px;text-align:center;width:60%;margin-left:auto;margin-right:auto;">
-                    <div style="border-top:1px solid #000;padding-top:6px;font-weight:bold;">Psic. ${psico}</div>
-                    <div>Psicólogo que clasifica</div>
-                </div>`;
-
-            abrirVentanaImpresion('Reporte Psicológico - ' + a.nombre, html);
-        }
 
         // --- GESTIÓN USUARIOS ---
         function renderTableUsuarios() {
@@ -2819,7 +2642,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             usuarios.push({ nombre: nom, fpv: fpv, login: log, pass: pas, rol: rol }); guardarDatos(); renderTableUsuarios();
             ['nuevo-usr-nombre','nuevo-usr-fpv','nuevo-usr-login','nuevo-usr-pass'].forEach(id => document.getElementById(id).value = '');
         }
-        function eliminarUsuario(idx) { if(usuarios[idx].login==='admin') return; usuarios.splice(idx, 1); guardarDatos(); renderTableUsuarios(); }
+        async function eliminarUsuario(idx) { if(usuarios[idx].login==='admin') return; const u = usuarios[idx]; usuarios.splice(idx, 1); try { localStorage.setItem(LS_USR, JSON.stringify(usuarios)); } catch(e) {} renderTableUsuarios(); try { if (window.PsicoCloud && window.PsicoCloud.eliminar) await window.PsicoCloud.eliminar('usuarios', u.login); } catch(e) { console.warn('No se pudo eliminar usuario de la nube', e); } }
 
         // --- REPORTES Y CONTADORES ---
         function poblarFiltroPsicologosStats() {
@@ -2921,52 +2744,43 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
                 return (!proc || a.proceso === proc) && (!res || a.status === res) && (!mes || parseInt(m) === parseInt(mes)) && (!anio || parseInt(y) === parseInt(anio));
             });
 
-            const soloDigitos = c => parseInt(String(c || '').replace(/\D/g, ''), 10) || 0;
-            filt.sort((a, b) => soloDigitos(a.ci) - soloDigitos(b.ci));
-
             let html = `
                 <div class="text-center mb-8 space-y-1">
-                    <p style="font-weight:bold;text-transform:uppercase;">República Bolivariana de Venezuela</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Ministerio del Poder Popular para la Defensa</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Aviación Militar Bolivariana</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Dirección Aérea de Logística</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">CAFMA</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">División de Medicina Aeroespacial</p>
-                    <p style="font-weight:bold;text-transform:uppercase;">Departamento de Psicología</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">República Bolivariana de Venezuela</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">Ministerio del Poder Popular para la Defensa</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">Aviación Militar Bolivariana</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">Direccion Aerea de Logistica</p>
+                    <p class="text-[10px] font-black uppercase tracking-wider leading-tight">Cafma</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">División de Medicina Aeropespacial</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider leading-tight">Departamento de Psicología</p>
                     <div class="pt-4 border-b-2 border-slate-800 pb-4 mb-4">
-                        <h2 style="font-weight:bold;text-transform:uppercase;">Reporte Estadístico de Selección</h2>
+                        <h2 class="font-black text-navy-blue military-title text-xl uppercase">Reporte Estadístico de Selección</h2>
                     </div>
-                    <div class="flex flex-wrap justify-center gap-3">
-                        <span style="font-weight:bold;text-transform:uppercase;">Proceso: ${proc||'TODOS'}</span>
-                        <span style="font-weight:bold;text-transform:uppercase;">Resultado: ${res||'TODOS'}</span>
-                        <span style="font-weight:bold;text-transform:uppercase;">Total Registros: ${filt.length}</span>
+                    <div class="flex flex-wrap justify-center gap-3 text-[10px]">
+                        <span class="bg-slate-100 px-3 py-1.5 border rounded-lg font-bold uppercase">Proceso: ${proc||'TODOS'}</span>
+                        <span class="bg-slate-100 px-3 py-1.5 border rounded-lg font-bold uppercase">Resultado: ${res||'TODOS'}</span>
+                        <span class="bg-slate-100 px-3 py-1.5 border rounded-lg font-bold uppercase">Total Registros: ${filt.length}</span>
                     </div>
-                    <p style="font-weight:bold;">Generado por: Psic. ${usuarioActivo.nombre} (FPV: ${usuarioActivo.fpv || 'N/A'}) | Fecha: ${new Date().toLocaleDateString()}</p>
+                    <p class="text-[9px] text-slate-500 font-bold pt-2">Generado por: Psic. ${usuarioActivo.nombre} (FPV: ${usuarioActivo.fpv || 'N/A'}) | Fecha: ${new Date().toLocaleDateString()}</p>
                 </div>
-                <table class="w-full text-left border-collapse mt-4 border">
-                    <thead>
-                        <tr><th style="font-weight:bold;border:1px solid #000;padding:5px;text-align:left;">Nombre y Apellido</th><th style="font-weight:bold;border:1px solid #000;padding:5px;text-align:left;">Cédula</th><th style="font-weight:bold;border:1px solid #000;padding:5px;text-align:left;">Condición</th></tr>
+                <table class="w-full text-left text-xs border-collapse mt-4 border shadow-sm">
+                    <thead class="bg-slate-100 border-b-2 border-slate-300">
+                        <tr><th class="p-3">Fecha</th><th class="p-3">Cédula</th><th class="p-3">Aspirante</th><th class="p-3">Proceso</th><th class="p-3 text-center">Estatus</th><th class="p-3 text-center">Psicólogo Certificador</th></tr>
                     </thead>
-                    <tbody>`;
-
+                    <tbody class="divide-y divide-slate-200">`;
+            
             if(filt.length === 0) {
-                html += `<tr><td colspan="3" style="font-weight:bold;border:1px solid #000;padding:12px;text-align:center;">No se encontraron resultados para estos filtros.</td></tr>`;
+                html += `<tr><td colspan="6" class="p-8 text-center text-slate-400 font-bold italic">No se encontraron resultados para estos filtros.</td></tr>`;
             } else {
                 filt.forEach(a => {
-                    html += `<tr><td style="font-weight:bold;border:1px solid #000;padding:5px;">${a.nombre}</td><td style="font-weight:bold;border:1px solid #000;padding:5px;">${a.ci}</td><td style="font-weight:bold;border:1px solid #000;padding:5px;">${a.status}</td></tr>`;
+                    const col = a.status==='Apto'?'text-emerald-700':a.status==='No Apto'?'text-rose-700':'text-slate-500';
+                    html += `<tr><td class="p-3">${a.fecha}</td><td class="p-3 font-mono">${a.ci}</td><td class="p-3 font-bold">${a.nombre}</td><td class="p-3">${a.proceso}</td><td class="p-3 text-center font-black ${col}">${a.status}</td><td class="p-3 text-center uppercase text-[10px]">${a.psicologo}</td></tr>`;
                 });
             }
-            html += `</tbody></table>
-                <div style="margin-top:70px;display:flex;justify-content:space-around;text-align:center;gap:40px;">
-                    <div style="width:45%;">
-                        <div style="border-top:1px solid #000;padding-top:6px;font-weight:bold;text-transform:uppercase;">Jefe del Departamento de Psicología</div>
-                    </div>
-                    <div style="width:45%;">
-                        <div style="border-top:1px solid #000;padding-top:6px;font-weight:bold;text-transform:uppercase;">Director del CAFMA</div>
-                    </div>
-                </div>`;
-
-            abrirVentanaImpresion('Reporte de Resultados', html);
+            html += `</tbody></table><div class="mt-8 text-center pt-8 border-t"><p class="text-[10px] uppercase font-bold text-slate-400">Fin del Reporte | Total Registros: ${filt.length}</p></div>`;
+            
+            document.getElementById('print-report-container').innerHTML = html;
+            window.print();
         }
 
         // =========================================================================
@@ -3351,20 +3165,15 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             const dataT = labels.map(k => resPai.escalasClinicas[k].t);
 
             chartPaiProfileInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Perfil - Puntuación T',
+                            label: 'Puntuación T Obtenida',
                             data: dataT,
-                            borderColor: '#0F1E36',
-                            backgroundColor: '#0F1E36',
-                            borderWidth: 2,
-                            tension: 0,
-                            fill: false,
-                            pointRadius: 4,
-                            pointBackgroundColor: dataT.map(t => t >= 70 ? '#dc2626' : '#0F1E36')
+                            backgroundColor: dataT.map(t => t >= 70 ? '#dc2626' : '#0F1E36'),
+                            borderRadius: 6
                         },
                         {
                             label: 'Línea de Corte (T=70)',
@@ -3474,11 +3283,11 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
             const data = escalas.map(e => e.decatipo);
 
             chart16pfInstance = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [
-                        { label: 'Perfil - Decatipo', data: data, borderColor: '#0F1E36', backgroundColor: '#0F1E36', borderWidth: 2, tension: 0, fill: false, pointRadius: 4, pointBackgroundColor: data.map(d => (d <= 3.4 || d >= 7.5) ? '#f59e0b' : '#0F1E36') },
+                        { label: 'Decatipo', data: data, backgroundColor: data.map(d => (d <= 3.4 || d >= 7.5) ? '#f59e0b' : '#0F1E36'), borderRadius: 6 },
                         { label: 'Límite inferior zona media', data: Array(labels.length).fill(4), type: 'line', borderColor: '#94a3b8', borderDash: [5, 5], borderWidth: 2, pointRadius: 0 },
                         { label: 'Límite superior zona media', data: Array(labels.length).fill(7), type: 'line', borderColor: '#94a3b8', borderDash: [5, 5], borderWidth: 2, pointRadius: 0 }
                     ]
@@ -3496,7 +3305,7 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
       import {
-        getFirestore, collection, doc, setDoc, onSnapshot, getDocs
+        getFirestore, collection, doc, setDoc, onSnapshot, getDocs, deleteDoc
       } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
       const badge = document.createElement('div');
@@ -3528,7 +3337,18 @@ window.PF16_INTERP = {"escalas": {"A": {"baja": "Frío, impersonal, distante", "
         }
       }
 
-      window.PsicoCloud = { guardar: (a, u) => guardar(a, u), listo: false };
+      window.PsicoCloud = { guardar: (a, u) => guardar(a, u), listo: false, eliminar: (col, id) => eliminar(col, id) };
+
+      async function eliminar(coleccion, id) {
+        if (!db) return;
+        try {
+          await deleteDoc(doc(db, coleccion, String(id)));
+          setBadge('sincronizado', true);
+        } catch (e) {
+          console.error('Error eliminando en la nube', e);
+          setBadge('sin sincronizar', false);
+        }
+      }
 
       async function iniciar() {
         let config;
